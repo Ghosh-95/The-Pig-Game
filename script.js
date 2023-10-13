@@ -12,14 +12,20 @@ const buttonHold = document.querySelector('.btn--hold');
 const diceEl = document.querySelector('.dice');
 
 // helping hands
-scoreOne.textContent = 0;
-scoreZero.textContent = 0;
-let scores = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
-let isPlaying = true;
+let scores, currentScore, activePlayer, isPlaying;
+function init() {
+    scores = [0, 0];
+    currentScore = 0;
+    activePlayer = 0;
+    isPlaying = true;
 
-diceEl.classList.add('hidden');
+    diceEl.classList.add('hidden');
+    [playerOne, playerZero].forEach(player => player.classList.remove('player--winner'));
+    playerZero.classList.add('player--active');
+    [scoreOne, scoreZero, currentZero, currentOne].forEach(score => score.textContent = 0);
+}
+
+init();
 
 function switchPlayer() {
     currentScore = 0;
@@ -71,3 +77,4 @@ function holdHandler() {
 
 buttonRoll.addEventListener('click', rollHandler);
 buttonHold.addEventListener('click', holdHandler);
+buttonNew.addEventListener('click', init);
